@@ -86,12 +86,12 @@ export default function Home() {
 
     return (
         <div className="min-h-screen flex items-center justify-center">
-            {gameWon &&<Confetti
-                width={window.innerWidth}
-                height={window.innerHeight}
-                tweenDuration={100}
-                className={"items-center justify-center"}
-            /> }
+            {/*{gameWon && <Confetti*/}
+            {/*    width={window.innerWidth}*/}
+            {/*    height={window.innerHeight}*/}
+            {/*    tweenDuration={100}*/}
+            {/*    className={"items-center justify-center"}*/}
+            {/*/>}*/}
             <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <h1 className="mb-4 text-4xl text-white text-center font-bold">Verbs Phrasals</h1>
                 {!gameWon && (<p className="mb-3 text-white">Hints: {hints.join(' ')}</p>
