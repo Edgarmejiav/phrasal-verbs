@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import Confetti from 'react-confetti'
 
-import verbs from './verbs.json';
+// import verbs from './verbs.js';
 import {IconVolumen} from "@/pages/IconVolumen";
+import {verbs} from "@/pages/verbs";
 
 function getRandomPosition(array) {
     if (array.length === 0) {
@@ -19,7 +20,15 @@ function generateHints(word) {
 }
 
 export default function Home() {
-    const [rWord, setRWord] = useState(getRandomPosition(verbs))
+    const [win, setWin] = useState({
+        width: 0,
+        height: 0,
+    });
+    const [verb, setVerb] = useState([{
+        "verb": "Give up",
+        "description": "To abandon something or give up on it"
+    }]);
+    const [rWord, setRWord] = useState(getRandomPosition(verb))
     const [word, setWord] = useState(rWord.verb);
     const [description, setDescription] = useState(rWord.description);
 
@@ -71,7 +80,7 @@ export default function Home() {
         setHints([]);
         setGuess('');
 
-        const rWord = getRandomPosition(verbs);
+        const rWord = getRandomPosition(verb);
 
         setDescription(rWord.description ?? "");
         setWord(rWord.verb ?? "");
@@ -84,14 +93,22 @@ export default function Home() {
         speechSynthesis.speak(text)
     }
 
+    useEffect(() => {
+        setVerb(verbs)
+        setWin({
+            width: window.innerWidth,
+            height: window.innerHeight
+        })
+    }, [])
+
     return (
         <div className="min-h-screen flex items-center justify-center">
-            {/*{gameWon && <Confetti*/}
-            {/*    width={window.innerWidth}*/}
-            {/*    height={window.innerHeight}*/}
-            {/*    tweenDuration={100}*/}
-            {/*    className={"items-center justify-center"}*/}
-            {/*/>}*/}
+            {gameWon && <Confetti
+                width={win.width}
+                height={win.height}
+                tweenDuration={100}
+                className={"items-center justify-center"}
+            />}
             <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
                 <h1 className="mb-4 text-4xl text-white text-center font-bold">Verbs Phrasals</h1>
                 {!gameWon && (<p className="mb-3 text-white">Hints: {hints.join(' ')}</p>
