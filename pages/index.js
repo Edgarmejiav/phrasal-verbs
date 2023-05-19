@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Confetti from 'react-confetti'
 import IconVolumen from "@/pages/components/IconVolumen";
 import verbs from "@/verbs.json";
+import Head from "next/head";
 
 
 function getRandomPosition(array) {
@@ -17,6 +18,7 @@ function getRandomPosition(array) {
 function generateHints(word) {
     return Array.from(word, (char) => (char === ' ' ? '*' : '_'));
 }
+
 
 export default function Home() {
     const [win, setWin] = useState({
@@ -101,49 +103,79 @@ export default function Home() {
     }, [])
 
     return (
-        <div className="min-h-screen flex items-center justify-center">
-            {gameWon && <Confetti
-                width={win.width}
-                height={win.height}
-                tweenDuration={100}
-                className={"items-center justify-center"}
-            />}
-            <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
-                <h1 className="mb-4 text-4xl text-white text-center font-bold">Verbs Phrasals</h1>
-                {!gameWon && (<p className="mb-3 text-white">Hints: {hints.join(' ')}</p>
-                )}
-                {gameWon && (
-                    <div className={"flex"}>
-                        <strong className="mb-4 mr-4 text-white text-center  text-3xl font-bold">{word}</strong>
-                        <IconVolumen onClick={handleVoice}/>
+        <>
+            <Head>
+                <title>Verbos Irregulares en Inglés</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                <meta name="title" content="Verbos Frasales"/>
+                <meta name="description" content="Aprende y practica verbos frasales en inglés en línea."/>
+                <meta name="keywords"
+                      content="inglés, verbos frasales, aprendizaje de idiomas, vocabulario"/>
+                <meta name="author" content="Edgarmejiav"/>
+                <meta property="og:type" content="website"/>
+                <meta property="og:site_name" content="Verbos Frasales"/>
+                <meta property="og:url" content="https://phrasal-verbs.vercel.app/"/>
+                <meta property="og:title"
+                      content="Verbos Frasales - Aprende y practica verbos frasales en inglés en línea."/>
+                <meta property="og:description"
+                      content="Mejora tus habilidades en el idioma inglés aprendiendo y practicando verbos frasales en contexto."/>
+                <meta property="og:image"
+                      content="https://contenthub-static.grammarly.com/blog/wp-content/uploads/2021/11/irregular-verbs-760x400.png"/>
+                <meta property="linkedin:title" content="Verbos Frasales"/>
+                <meta property="linkedin:description"
+                      content="Mejora tus habilidades en el idioma inglés aprendiendo y practicando verbos frasales en contexto."/>
+                <meta property="linkedin:image"
+                      content="https://contenthub-static.grammarly.com/blog/wp-content/uploads/2021/11/irregular-verbs-760x400.png"/>
+                <meta property="linkedin:url"
+                      content="https://phrasal-verbs.vercel.app/"/>
+                <title>Verbos Frasales</title>
+
+            </Head>
+
+            <div className="min-h-screen flex items-center justify-center">
+                {gameWon && <Confetti
+                    width={win.width}
+                    height={win.height}
+                    tweenDuration={100}
+                    className={"items-center justify-center"}
+                />}
+                <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+                    <h1 className="mb-4 text-4xl text-white text-center font-bold">Verbs Phrasals</h1>
+                    {!gameWon && (<p className="mb-3 text-white">Hints: {hints.join(' ')}</p>
+                    )}
+                    {gameWon && (
+                        <div className={"flex"}>
+                            <strong className="mb-4 mr-4 text-white text-center  text-3xl font-bold">{word}</strong>
+                            <IconVolumen onClick={handleVoice}/>
+                        </div>
+
+                    )}
+                    <figcaption className="mb-3 text-white">{description}</figcaption>
+
+                    <input
+                        disabled={gameWon}
+                        className="my-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        type="text" value={guess} onChange={(e) => setGuess(e.target.value)}/>
+                    <div className="flex justify-between my-2">
+                        <button
+                            className={`  flex-1 font-bold text-white mr-1  py-2 px-4 rounded ${gameWon ? `  bg-gray-600 hover:bg-gray-500  ` : `bg-blue-500 hover:bg-blue-700   `} `}
+                            disabled={gameWon} onClick={handleGuess}>try
+                        </button>
+                        <button
+                            className={`  flex-1 font-bold text-white ml-1  py-2 px-4 rounded ${gameWon ? `  bg-gray-600 hover:bg-gray-500  ` : `bg-blue-500 hover:bg-blue-700   `} `}
+                            disabled={gameWon} onClick={revealHint}>hint
+                        </button>
                     </div>
+                    <div className="flex justify-between my-2">
 
-                )}
-                <figcaption className="mb-3 text-white">{description}</figcaption>
-
-                <input
-                    disabled={gameWon}
-                    className="my-4 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    type="text" value={guess} onChange={(e) => setGuess(e.target.value)}/>
-                <div className="flex justify-between my-2">
-                    <button
-                        className={`  flex-1 font-bold text-white mr-1  py-2 px-4 rounded ${gameWon ? `  bg-gray-600 hover:bg-gray-500  ` : `bg-blue-500 hover:bg-blue-700   `} `}
-                        disabled={gameWon} onClick={handleGuess}>try
-                    </button>
-                    <button
-                        className={`  flex-1 font-bold text-white ml-1  py-2 px-4 rounded ${gameWon ? `  bg-gray-600 hover:bg-gray-500  ` : `bg-blue-500 hover:bg-blue-700   `} `}
-                        disabled={gameWon} onClick={revealHint}>hint
-                    </button>
-                </div>
-                <div className="flex justify-between my-2">
-
-                    <button
-                        className={`flex-1 text-white   py-2 px-4 rounded   font-bold   ${!gameWon ? `   bg-gray-500` : `   bg-green-700 hover:bg-green-500 `}`}
-                        disabled={!gameWon} onClick={nextStep}>next
-                    </button>
+                        <button
+                            className={`flex-1 text-white   py-2 px-4 rounded   font-bold   ${!gameWon ? `   bg-gray-500` : `   bg-green-700 hover:bg-green-500 `}`}
+                            disabled={!gameWon} onClick={nextStep}>next
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
 
     );
 };
