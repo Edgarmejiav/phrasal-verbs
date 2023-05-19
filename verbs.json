@@ -1,4 +1,4 @@
-export const verbs = [{"verb": "Look after", "description": "To take care of or watch over someone or something"}, {
+[{"verb": "Look after", "description": "To take care of or watch over someone or something"}, {
     "verb": "Give up",
     "description": "To abandon something or give up on it"
 }, {"verb": "Get along", "description": "To have a good relationship with someone"}, {
