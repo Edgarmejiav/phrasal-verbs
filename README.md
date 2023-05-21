@@ -40,7 +40,7 @@ El contenido de este repositorio está licenciado bajo la [Licencia MIT](LICENSE
 
 ## Agradecimientos
 
-Este repositorio es mantenido por [Tu Nombre]. Se agradecen mucho las contribuciones de la comunidad de código abierto. Si encuentras este repositorio útil, considera darle una estrella.
+Este repositorio es mantenido por [edgarmejiav](https://github.com/Edgarmejiav). Se agradecen mucho las contribuciones de la comunidad de código abierto. Si encuentras este repositorio útil, considera darle una estrella.
 
 ¡Feliz aprendizaje y dominio de esos verbos frasales!
 
